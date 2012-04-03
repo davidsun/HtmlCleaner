@@ -454,6 +454,7 @@ public class HtmlCleaner {
 
     public TagNode clean(final URL url, String charset) throws IOException {
         final URLConnection urlConnection = url.openConnection();
+        urlConnection.setReadTimeout(properties.getConnectionReadTimeout());
         if (charset == null) {
             charset = Utils.getCharsetFromContentTypeString(urlConnection.getHeaderField("Content-Type"));
         }
