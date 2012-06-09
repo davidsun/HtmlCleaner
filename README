@@ -9,4 +9,4 @@ Briefly speaking, the modifications are
 * Add new class *FastHtmlSerializer* to output the HTML tree non-recursively, to avoid stack overflow (especially for Android)
 * Other minor changes 
 
-HtmlCleaner is used as HTML parser in EasyRSS (http://easyrssofficial.herokuapp.com/).
+HtmlCleaner is used as HTML parser in EasyRSS (http://easyrss.pursuer.me/).
