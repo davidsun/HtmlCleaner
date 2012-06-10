@@ -75,7 +75,7 @@ public class CleanerTransformations {
     }
 
     public TagTransformation getTransformation(final String tagName) {
-        return tagName == null ? null : (TagTransformation) mappings.get(tagName.toLowerCase());
+        return tagName == null ? null : mappings.get(tagName.toLowerCase());
     }
 
     public boolean hasTransformationForTag(final String tagName) {

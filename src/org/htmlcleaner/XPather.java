@@ -77,7 +77,7 @@ import java.util.*;
 public class XPather {
 
     // array of basic tokens of which XPath expression is made
-    private String tokenArray[];
+    final private String tokenArray[];
 
     /**
      * Constructor - creates XPather instance with specified XPath expression.
@@ -117,7 +117,7 @@ public class XPather {
                 }
             } else if (isToken("[", from)) {
                 final int closingBracket = findClosingIndex(from, to);
-                if (closingBracket > 0 && object instanceof Collection) {
+                if (closingBracket > 0) {
                     final Collection value = filterByCondition(object, from + 1, closingBracket - 1);
                     return evaluateAgainst(value, closingBracket + 1, to, false, position, last, isFilterContext,
                             filterSource);

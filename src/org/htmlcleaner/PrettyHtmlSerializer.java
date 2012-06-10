@@ -106,7 +106,7 @@ public class PrettyHtmlSerializer extends HtmlSerializer {
         while (tokenizer.hasMoreTokens()) {
             final String line = tokenizer.nextToken().trim();
             if (!"".equals(line)) {
-                result.append(indent).append(line).append("\n");
+                result.append(indent).append(line).append('\n');
             }
         }
 

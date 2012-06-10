@@ -67,7 +67,7 @@ import java.util.*;
 abstract public class HtmlTokenizer {
     private final static int WORKING_BUFFER_SIZE = 1024;
 
-    private BufferedReader reader;
+    final private BufferedReader reader;
     private char[] working = new char[WORKING_BUFFER_SIZE];
     private transient int pos = 0;
     private transient int len = -1;
@@ -80,12 +80,12 @@ abstract public class HtmlTokenizer {
     private boolean isScriptContext = false;
     private CleanerProperties props;
     private boolean isOmitUnknownTags;
-    private boolean isTreatUnknownTagsAsContent;
+    final private boolean isTreatUnknownTagsAsContent;
     private boolean isOmitDeprecatedTags;
-    private boolean isTreatDeprecatedTagsAsContent;
-    private boolean isNamespacesAware;
+    final private boolean isTreatDeprecatedTagsAsContent;
+    final private boolean isNamespacesAware;
     private boolean isOmitComments;
-    private boolean isAllowMultiWordAttributes;
+    final private boolean isAllowMultiWordAttributes;
     private boolean isAllowHtmlInsideAttributes;
     private CleanerTransformations transformations;
     private ITagInfoProvider tagInfoProvider;

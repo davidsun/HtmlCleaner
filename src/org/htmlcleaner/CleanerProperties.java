@@ -84,14 +84,9 @@ public class CleanerProperties {
     private String hyphenReplacementInComment = "=";
     private String booleanAttributeValues = BOOL_ATT_SELF;
     private String pruneTags = null;
-    private int connectionReadTimeout = 10 * 1000;
 
     public String getBooleanAttributeValues() {
         return booleanAttributeValues;
-    }
-
-    public int getConnectionReadTimeout() {
-        return connectionReadTimeout;
     }
 
     public String getHyphenReplacementInComment() {
@@ -202,10 +197,6 @@ public class CleanerProperties {
         } else {
             this.booleanAttributeValues = BOOL_ATT_SELF;
         }
-    }
-
-    public void setConnectionReadTimeout(final int connectionReadTimeout) {
-        this.connectionReadTimeout = connectionReadTimeout;
     }
 
     public void setHyphenReplacementInComment(final String hyphenReplacementInComment) {

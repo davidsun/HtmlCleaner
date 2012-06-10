@@ -62,23 +62,27 @@ import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import android.R.integer;
+
 /**
  * <p>
  * Common utilities.
  * </p>
  */
 final public class Utils {
+    final public static int RESERVED_XML_CHARS_SIZE = 128;
     final public static String VAR_START = "${";
     final public static String VAR_END = "}";
 
-    public static final Map<Character, String> RESERVED_XML_CHARS = new HashMap<Character, String>();
+    public static final String RESERVED_XML_CHARS[] = new String[RESERVED_XML_CHARS_SIZE];
+    public static final char RESERVED_XML_CHARS_LIST[] = { '&', '<', '>', '\"', '\'' };
 
     static {
-        RESERVED_XML_CHARS.put('&', "&amp;");
-        RESERVED_XML_CHARS.put('<', "&lt;");
-        RESERVED_XML_CHARS.put('>', "&gt;");
-        RESERVED_XML_CHARS.put('\"', "&quot;");
-        RESERVED_XML_CHARS.put('\'', "&apos;");
+        RESERVED_XML_CHARS['&'] = "&amp;";
+        RESERVED_XML_CHARS['<'] = "&lt;";
+        RESERVED_XML_CHARS['>'] = "&gt;";
+        RESERVED_XML_CHARS['\"'] = "&quot;";
+        RESERVED_XML_CHARS['\''] = "&apos;";
     }
 
     /**
@@ -166,7 +170,7 @@ final public class Utils {
     }
 
     public static boolean isReservedXmlChar(final char ch) {
-        return RESERVED_XML_CHARS.containsKey(ch);
+        return (ch < RESERVED_XML_CHARS_SIZE && RESERVED_XML_CHARS[ch] != null);
     }
 
     public static boolean isValidInt(final String s, final int radix) {
@@ -238,8 +242,8 @@ final public class Utils {
                         if (translateSpecialEntities) {
                             // get minimal following sequence required to
                             // recognize some special entitiy
-                            final String seq = s.substring(i, i
-                                    + Math.min(SpecialEntity.getMaxEntityLength() + 2, len - i));
+                            final String seq = s.substring(i,
+                                    i + Math.min(SpecialEntity.getMaxEntityLength() + 2, len - i));
                             final int semiIndex = seq.indexOf(';');
                             if (semiIndex > 0) {
                                 final String entityKey = seq.substring(1, semiIndex);
@@ -256,11 +260,12 @@ final public class Utils {
                         if (advanced) {
                             final String sub = s.substring(i);
                             boolean isReservedSeq = false;
-                            for (Map.Entry<Character, String> entry : RESERVED_XML_CHARS.entrySet()) {
-                                final String seq = entry.getValue();
+                            for (int j = 0; j < RESERVED_XML_CHARS_LIST.length; j++) {
+                                final char currentChar = RESERVED_XML_CHARS_LIST[j];
+                                final String seq = RESERVED_XML_CHARS[currentChar];
                                 if (sub.startsWith(seq)) {
-                                    result.append(isDomCreation ? entry.getKey() : (props.isTransResCharsToNCR() ? "&#"
-                                            + (int) entry.getKey() + ";" : seq));
+                                    result.append(isDomCreation ? currentChar : (props.isTransResCharsToNCR() ? "&#"
+                                            + (int) currentChar + ";" : seq));
                                     i += seq.length() - 1;
                                     isReservedSeq = true;
                                     break;
@@ -268,7 +273,7 @@ final public class Utils {
                             }
                             if (!isReservedSeq) {
                                 result.append(isDomCreation ? "&" : (props.isTransResCharsToNCR() ? "&#" + (int) '&'
-                                        + ";" : RESERVED_XML_CHARS.get('&')));
+                                        + ";" : RESERVED_XML_CHARS['&']));
                             }
                             continue;
                         }
@@ -277,7 +282,7 @@ final public class Utils {
                     }
                 } else if (isReservedXmlChar(ch)) {
                     result.append(props.isTransResCharsToNCR() ? "&#" + (int) ch + ";" : (isDomCreation ? ch
-                            : RESERVED_XML_CHARS.get(ch)));
+                            : RESERVED_XML_CHARS[ch]));
                 } else {
                     result.append(ch);
                 }

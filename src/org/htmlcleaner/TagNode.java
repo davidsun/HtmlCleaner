@@ -373,7 +373,7 @@ public class TagNode extends TagToken implements HtmlNode {
         final List<TagNode> childTagList = getChildTagList();
         final TagNode childrenArray[] = new TagNode[childTagList.size()];
         for (int i = 0; i < childTagList.size(); i++) {
-            childrenArray[i] = (TagNode) childTagList.get(i);
+            childrenArray[i] = childTagList.get(i);
         }
 
         return childrenArray;

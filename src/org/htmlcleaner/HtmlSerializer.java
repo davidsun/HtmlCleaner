@@ -77,12 +77,12 @@ public abstract class HtmlSerializer extends Serializer {
     }
 
     protected String escapeText(String s) {
-        boolean recognizeUnicodeChars = props.isRecognizeUnicodeChars();
-        boolean translateSpecialEntities = props.isTranslateSpecialEntities();
+        final boolean recognizeUnicodeChars = props.isRecognizeUnicodeChars();
+        final boolean translateSpecialEntities = props.isTranslateSpecialEntities();
 
         if (s != null) {
-            int len = s.length();
-            StringBuilder result = new StringBuilder(len);
+            final int len = s.length();
+            final StringBuilder result = new StringBuilder(len);
 
             for (int i = 0; i < len; i++) {
                 char ch = s.charAt(i);
@@ -144,10 +144,11 @@ public abstract class HtmlSerializer extends Serializer {
 
                         String sub = s.substring(i);
                         boolean isReservedSeq = false;
-                        for (Map.Entry<Character, String> entry : Utils.RESERVED_XML_CHARS.entrySet()) {
-                            seq = entry.getValue();
+                        for (int j = 0; j < Utils.RESERVED_XML_CHARS_LIST.length; j++) {
+                            final char currentChar = Utils.RESERVED_XML_CHARS_LIST[j];
+                            seq = Utils.RESERVED_XML_CHARS[currentChar];
                             if (sub.startsWith(seq)) {
-                                result.append(props.isTransResCharsToNCR() ? "&#" + (int) entry.getKey() + ";" : seq);
+                                result.append(props.isTransResCharsToNCR() ? "&#" + (int) currentChar + ";" : seq);
                                 i += seq.length() - 1;
                                 isReservedSeq = true;
                                 break;
@@ -193,7 +194,7 @@ public abstract class HtmlSerializer extends Serializer {
         }
 
         if (nsAware) {
-            Map<String, String> nsDeclarations = tagNode.getNamespaceDeclarations();
+            final Map<String, String> nsDeclarations = tagNode.getNamespaceDeclarations();
             if (nsDeclarations != null) {
                 for (Map.Entry<String, String> entry : nsDeclarations.entrySet()) {
                     String prefix = entry.getKey();
