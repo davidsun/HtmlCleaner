@@ -230,7 +230,7 @@ final public class Utils {
                                 i = charIndex;
                             } else {
                                 i = charIndex;
-                                result.append("&#" + unicode + ";");
+                                result.append("&#" + (isHex ? "x" : "") + unicode + ";");
                             }
                         } else {
                             result.append("&amp;");
