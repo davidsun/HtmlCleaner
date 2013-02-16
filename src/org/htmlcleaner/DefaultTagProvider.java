@@ -62,10 +62,8 @@ import java.util.HashMap;
  * file requires some processing time.
  */
 public class DefaultTagProvider extends HashMap<String, TagInfo> implements ITagInfoProvider {
-    private static final long serialVersionUID = 1L;
-
-    // singleton instance, used if no other TagInfoProvider is specified
     private static DefaultTagProvider instance;
+    private static final long serialVersionUID = 1L;
 
     /**
      * @return Singleton instance of this class.
@@ -77,7 +75,7 @@ public class DefaultTagProvider extends HashMap<String, TagInfo> implements ITag
         return instance;
     }
 
-    public DefaultTagProvider() {
+    protected DefaultTagProvider() {
         super();
 
         TagInfo tagInfo;
@@ -107,38 +105,32 @@ public class DefaultTagProvider extends HashMap<String, TagInfo> implements ITag
 
         tagInfo = new TagInfo("h1", TagInfo.CONTENT_ALL, TagInfo.BODY, false, false, false);
         tagInfo.defineCloseBeforeCopyInsideTags("a,bdo,strong,em,q,b,i,u,tt,sub,sup,big,small,strike,s,font");
-        tagInfo
-                .defineCloseBeforeTags("h1,h2,h3,h4,h5,h6,p,address,label,abbr,acronym,dfn,kbd,samp,var,cite,code,param,xml");
+        tagInfo.defineCloseBeforeTags("h1,h2,h3,h4,h5,h6,p,address,label,abbr,acronym,dfn,kbd,samp,var,cite,code,param,xml");
         this.put("h1", tagInfo);
 
         tagInfo = new TagInfo("h2", TagInfo.CONTENT_ALL, TagInfo.BODY, false, false, false);
         tagInfo.defineCloseBeforeCopyInsideTags("a,bdo,strong,em,q,b,i,u,tt,sub,sup,big,small,strike,s,font");
-        tagInfo
-                .defineCloseBeforeTags("h1,h2,h3,h4,h5,h6,p,address,label,abbr,acronym,dfn,kbd,samp,var,cite,code,param,xml");
+        tagInfo.defineCloseBeforeTags("h1,h2,h3,h4,h5,h6,p,address,label,abbr,acronym,dfn,kbd,samp,var,cite,code,param,xml");
         this.put("h2", tagInfo);
 
         tagInfo = new TagInfo("h3", TagInfo.CONTENT_ALL, TagInfo.BODY, false, false, false);
         tagInfo.defineCloseBeforeCopyInsideTags("a,bdo,strong,em,q,b,i,u,tt,sub,sup,big,small,strike,s,font");
-        tagInfo
-                .defineCloseBeforeTags("h1,h2,h3,h4,h5,h6,p,address,label,abbr,acronym,dfn,kbd,samp,var,cite,code,param,xml");
+        tagInfo.defineCloseBeforeTags("h1,h2,h3,h4,h5,h6,p,address,label,abbr,acronym,dfn,kbd,samp,var,cite,code,param,xml");
         this.put("h3", tagInfo);
 
         tagInfo = new TagInfo("h4", TagInfo.CONTENT_ALL, TagInfo.BODY, false, false, false);
         tagInfo.defineCloseBeforeCopyInsideTags("a,bdo,strong,em,q,b,i,u,tt,sub,sup,big,small,strike,s,font");
-        tagInfo
-                .defineCloseBeforeTags("h1,h2,h3,h4,h5,h6,p,address,label,abbr,acronym,dfn,kbd,samp,var,cite,code,param,xml");
+        tagInfo.defineCloseBeforeTags("h1,h2,h3,h4,h5,h6,p,address,label,abbr,acronym,dfn,kbd,samp,var,cite,code,param,xml");
         this.put("h4", tagInfo);
 
         tagInfo = new TagInfo("h5", TagInfo.CONTENT_ALL, TagInfo.BODY, false, false, false);
         tagInfo.defineCloseBeforeCopyInsideTags("a,bdo,strong,em,q,b,i,u,tt,sub,sup,big,small,strike,s,font");
-        tagInfo
-                .defineCloseBeforeTags("h1,h2,h3,h4,h5,h6,p,address,label,abbr,acronym,dfn,kbd,samp,var,cite,code,param,xml");
+        tagInfo.defineCloseBeforeTags("h1,h2,h3,h4,h5,h6,p,address,label,abbr,acronym,dfn,kbd,samp,var,cite,code,param,xml");
         this.put("h5", tagInfo);
 
         tagInfo = new TagInfo("h6", TagInfo.CONTENT_ALL, TagInfo.BODY, false, false, false);
         tagInfo.defineCloseBeforeCopyInsideTags("a,bdo,strong,em,q,b,i,u,tt,sub,sup,big,small,strike,s,font");
-        tagInfo
-                .defineCloseBeforeTags("h1,h2,h3,h4,h5,h6,p,address,label,abbr,acronym,dfn,kbd,samp,var,cite,code,param,xml");
+        tagInfo.defineCloseBeforeTags("h1,h2,h3,h4,h5,h6,p,address,label,abbr,acronym,dfn,kbd,samp,var,cite,code,param,xml");
         this.put("h6", tagInfo);
 
         tagInfo = new TagInfo("p", TagInfo.CONTENT_ALL, TagInfo.BODY, false, false, false);
@@ -295,8 +287,7 @@ public class DefaultTagProvider extends HashMap<String, TagInfo> implements ITag
         tagInfo = new TagInfo("table", TagInfo.CONTENT_ALL, TagInfo.BODY, false, false, false);
         tagInfo.defineAllowedChildrenTags("tr,tbody,thead,tfoot,colgroup,col,form,caption,tr");
         tagInfo.defineCloseBeforeCopyInsideTags("a,bdo,strong,em,q,b,i,u,tt,sub,sup,big,small,strike,s,font");
-        tagInfo
-                .defineCloseBeforeTags("tr,thead,tbody,tfoot,caption,colgroup,table,address,label,abbr,acronym,dfn,kbd,samp,var,cite,code,param");
+        tagInfo.defineCloseBeforeTags("tr,thead,tbody,tfoot,caption,colgroup,table,address,label,abbr,acronym,dfn,kbd,samp,var,cite,code,param");
         this.put("table", tagInfo);
 
         tagInfo = new TagInfo("tr", TagInfo.CONTENT_ALL, TagInfo.BODY, false, false, false);
@@ -355,8 +346,7 @@ public class DefaultTagProvider extends HashMap<String, TagInfo> implements ITag
         tagInfo = new TagInfo("form", TagInfo.CONTENT_ALL, TagInfo.BODY, false, false, true);
         tagInfo.defineForbiddenTags("form");
         tagInfo.defineCloseBeforeCopyInsideTags("a,bdo,strong,em,q,b,i,u,tt,sub,sup,big,small,strike,s,font");
-        tagInfo
-                .defineCloseBeforeTags("option,optgroup,textarea,select,fieldset,p,address,label,abbr,acronym,dfn,kbd,samp,var,cite,code,param,xml");
+        tagInfo.defineCloseBeforeTags("option,optgroup,textarea,select,fieldset,p,address,label,abbr,acronym,dfn,kbd,samp,var,cite,code,param,xml");
         this.put("form", tagInfo);
 
         tagInfo = new TagInfo("input", TagInfo.CONTENT_NONE, TagInfo.BODY, false, false, false);
