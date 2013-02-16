@@ -56,13 +56,10 @@ package org.htmlcleaner;
 import java.io.*;
 import java.net.URL;
 import java.nio.charset.Charset;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import android.R.integer;
 
 /**
  * <p>
