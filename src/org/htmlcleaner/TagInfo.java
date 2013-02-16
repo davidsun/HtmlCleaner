@@ -191,8 +191,6 @@ public class TagInfo {
         }
     }
 
-    // getters and setters
-
     public void defineForbiddenTags(final String commaSeparatedListOfTags) {
         final StringTokenizer tokenizer = new StringTokenizer(commaSeparatedListOfTags.toLowerCase(), ",");
         while (tokenizer.hasMoreTokens()) {
