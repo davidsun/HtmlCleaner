@@ -518,5 +518,4 @@ public class DefaultTagProvider extends HashMap<String, TagInfo> implements ITag
             remove(tagName.toLowerCase());
         }
     }
-
 }

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2011 Zheng Sun
+ * Copyright 2011-2013 Zheng Sun
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,46 +14,11 @@
  * limitations under the License.
  ******************************************************************************/
 
-/*  Copyright (c) 2006-2007, Vladimir Nikic
- All rights reserved.
-
- Redistribution and use of this software in source and binary forms, 
- with or without modification, are permitted provided that the following 
- conditions are met:
-
- * Redistributions of source code must retain the above
- copyright notice, this list of conditions and the
- following disclaimer.
-
- * Redistributions in binary form must reproduce the above
- copyright notice, this list of conditions and the
- following disclaimer in the documentation and/or other
- materials provided with the distribution.
-
- * The name of HtmlCleaner may not be used to endorse or promote 
- products derived from this software without specific prior
- written permission.
-
- THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
- AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
- IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE 
- ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE 
- LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR 
- CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF 
- SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
- INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN 
- CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
- ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
- POSSIBILITY OF SUCH DAMAGE.
-
- You can contact Vladimir Nikic by sending e-mail to
- nikic_vladimir@yahoo.com. Please include the word "HtmlCleaner" in the
- subject line.
- */
-
 package org.htmlcleaner;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.StringTokenizer;
 
 /**
  * <p>
@@ -120,28 +85,28 @@ import java.util.*;
  */
 public class TagInfo {
 
-    protected static final int HEAD_AND_BODY = 0;
-    protected static final int HEAD = 1;
     protected static final int BODY = 2;
-
     protected static final int CONTENT_ALL = 0;
     protected static final int CONTENT_NONE = 1;
-    protected static final int CONTENT_TEXT = 2;
 
-    private String name;
-    final private int contentType;
-    private Set mustCloseTags = new HashSet();
-    private Set higherTags = new HashSet();
-    private Set childTags = new HashSet();
-    private Set permittedTags = new HashSet();
-    private Set copyTags = new HashSet();
-    private Set continueAfterTags = new HashSet();
+    protected static final int CONTENT_TEXT = 2;
+    protected static final int HEAD = 1;
+    protected static final int HEAD_AND_BODY = 0;
+
     private int belongsTo = BODY;
-    private String requiredParent = null;
-    private String fatalTag = null;
+    private Set<String> childTags = new HashSet<String>();
+    final private int contentType;
+    private Set<String> continueAfterTags = new HashSet<String>();
+    private Set<String> copyTags = new HashSet<String>();
     private boolean deprecated = false;
-    private boolean unique = false;
+    private String fatalTag = null;
+    private Set<String> higherTags = new HashSet<String>();
     private boolean ignorePermitted = false;
+    private Set<String> mustCloseTags = new HashSet<String>();
+    private String name;
+    private Set<String> permittedTags = new HashSet<String>();
+    private String requiredParent = null;
+    private boolean unique = false;
 
     public TagInfo(final String name, final int contentType, final int belongsTo, final boolean depricated,
             final boolean unique, final boolean ignorePermitted) {
@@ -257,7 +222,7 @@ public class TagInfo {
         return belongsTo;
     }
 
-    public Set getChildTags() {
+    public Set<String> getChildTags() {
         return childTags;
     }
 
@@ -265,11 +230,11 @@ public class TagInfo {
         return contentType;
     }
 
-    public Set getContinueAfterTags() {
+    public Set<String> getContinueAfterTags() {
         return continueAfterTags;
     }
 
-    public Set getCopyTags() {
+    public Set<String> getCopyTags() {
         return copyTags;
     }
 
@@ -277,11 +242,11 @@ public class TagInfo {
         return fatalTag;
     }
 
-    public Set getHigherTags() {
+    public Set<String> getHigherTags() {
         return higherTags;
     }
 
-    public Set getMustCloseTags() {
+    public Set<String> getMustCloseTags() {
         return mustCloseTags;
     }
 
@@ -289,7 +254,7 @@ public class TagInfo {
         return name;
     }
 
-    public Set getPermittedTags() {
+    public Set<String> getPermittedTags() {
         return permittedTags;
     }
 
@@ -353,17 +318,17 @@ public class TagInfo {
         this.belongsTo = belongsTo;
     }
 
-    public void setChildTags(final Set childTags) {
+    public void setChildTags(final Set<String> childTags) {
         this.childTags = childTags;
     }
 
     // other functionality
 
-    public void setContinueAfterTags(final Set continueAfterTags) {
+    public void setContinueAfterTags(final Set<String> continueAfterTags) {
         this.continueAfterTags = continueAfterTags;
     }
 
-    public void setCopyTags(final Set copyTags) {
+    public void setCopyTags(final Set<String> copyTags) {
         this.copyTags = copyTags;
     }
 
@@ -375,7 +340,7 @@ public class TagInfo {
         this.fatalTag = fatalTag;
     }
 
-    public void setHigherTags(final Set higherTags) {
+    public void setHigherTags(final Set<String> higherTags) {
         this.higherTags = higherTags;
     }
 
@@ -383,7 +348,7 @@ public class TagInfo {
         this.ignorePermitted = ignorePermitted;
     }
 
-    public void setMustCloseTags(final Set mustCloseTags) {
+    public void setMustCloseTags(final Set<String> mustCloseTags) {
         this.mustCloseTags = mustCloseTags;
     }
 
@@ -391,7 +356,7 @@ public class TagInfo {
         this.name = name;
     }
 
-    public void setPermittedTags(final Set permittedTags) {
+    public void setPermittedTags(final Set<String> permittedTags) {
         this.permittedTags = permittedTags;
     }
 
@@ -402,5 +367,4 @@ public class TagInfo {
     public void setUnique(final boolean unique) {
         this.unique = unique;
     }
-
 }
